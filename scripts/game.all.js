@@ -43,6 +43,9 @@ function create() {
     map = game.add.tilemap('map');
     map.addTilesetImage('tiles');
 
+    // kamera ma sledzic gracza
+    game.camera.follow(mario);
+
     mapLayers['collide'] = map.createLayer('collide');
     mapLayers['background'] = map.createLayer('background');
     mapLayers['collide'].resizeWorld();
