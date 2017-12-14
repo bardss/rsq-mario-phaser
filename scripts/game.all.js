@@ -1,6 +1,12 @@
-var game = new Phaser.Game(260, 240, Phaser.AUTO, "game", { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(260, 240, Phaser.AUTO, "game", {
+    preload: preload,
+    create: create,
+    update: update,
+    render: render
+});
 
 var mario;
+var cursors;
 
 function preload() {
     // W tej metodzie ładujemy wszystkie potrzebne assety
@@ -16,12 +22,23 @@ function create() {
     mario = game.add.sprite(100, 100, 'mario', 'idle');
 
     game.physics.enable(mario, Phaser.Physics.ARCADE);
+
+    // Przypisanie do zmiennej kursorów klawiatury jako kontrolera dla gry 
+    cursors = game.input.keyboard.createCursorKeys();
 };
 
 function update() {
     // Główna pętla gry
     // Metoda uruchamiana jest z bardzo dużą częstotliwością (~60 fps)
-    
+    if (cursors.right.isDown) {
+        mario.body.velocity.x = 150;
+    }
+    else if (cursors.left.isDown) {
+        mario.body.velocity.x = -150;
+    }
+    else {
+        mario.body.velocity.x = 0;
+    }
 };
 
 function render() {
