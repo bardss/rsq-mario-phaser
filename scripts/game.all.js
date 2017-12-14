@@ -20,6 +20,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     mario = game.add.sprite(100, 100, 'mario', 'idle');
+    mario.animations.add('walk', Phaser.Animation.generateFrameNames('walk_', 0, 3, '', 2), 30, true);
 
     game.physics.enable(mario, Phaser.Physics.ARCADE);
 
@@ -32,12 +33,17 @@ function update() {
     // Metoda uruchamiana jest z bardzo dużą częstotliwością (~60 fps)
     if (cursors.right.isDown) {
         mario.body.velocity.x = 150;
+        mario.scale.x = 1;
+        mario.animations.play('walk');
     }
     else if (cursors.left.isDown) {
         mario.body.velocity.x = -150;
+        mario.scale.x = - 1;
+        mario.animations.play('walk');
     }
     else {
         mario.body.velocity.x = 0;
+        mario.frameName = "idle";
     }
 };
 
