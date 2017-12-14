@@ -20,6 +20,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     mario = game.add.sprite(100, 100, 'mario', 'idle');
+    mario.anchor.setTo(0.5) // przesunięcie środka postaci w środek kwadratu
     mario.animations.add('walk', Phaser.Animation.generateFrameNames('walk_', 0, 3, '', 2), 30, true);
 
     game.physics.enable(mario, Phaser.Physics.ARCADE);
