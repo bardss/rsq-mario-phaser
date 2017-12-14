@@ -7,6 +7,7 @@ var game = new Phaser.Game(260, 240, Phaser.AUTO, "game", {
 
 var mario;
 var cursors;
+var spacebar;
 
 function preload() {
     // W tej metodzie ładujemy wszystkie potrzebne assety
@@ -27,6 +28,7 @@ function create() {
 
     // Przypisanie do zmiennej kursorów klawiatury jako kontrolera dla gry 
     cursors = game.input.keyboard.createCursorKeys();
+    spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 };
 
 function update() {
@@ -39,12 +41,16 @@ function update() {
     }
     else if (cursors.left.isDown) {
         mario.body.velocity.x = -150;
-        mario.scale.x = - 1;
+        mario.scale.x = -1;
         mario.animations.play('walk');
     }
     else {
         mario.body.velocity.x = 0;
         mario.frameName = "idle";
+    }
+
+    if (spacebar.isDown) {
+        mario.body.velocity.y = -300;
     }
 };
 
