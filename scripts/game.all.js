@@ -12,7 +12,8 @@ var spacebar;
 function preload() {
     // W tej metodzie ładujemy wszystkie potrzebne assety
     game.load.atlas('mario', 'assets/images/mario/mario.png', 'assets/images/mario/mario.json');
-
+    game.load.image('tiles', 'assets/map/tiles.png');
+    game.load.tilemap('map', 'assets/map/map.json', null, Phaser.Tilemap.TILED_JSON);
 };
 
 function create() {
@@ -29,6 +30,10 @@ function create() {
     // Przypisanie do zmiennej kursorów klawiatury jako kontrolera dla gry 
     cursors = game.input.keyboard.createCursorKeys();
     spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+    // mapa
+    game.stage.backgroundColor = "#6888ff";
+
 };
 
 function update() {
