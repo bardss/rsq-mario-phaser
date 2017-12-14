@@ -10,12 +10,15 @@ var cursors;
 var spacebar;
 var map;
 var mapLayers = {};
+var audio = {};
 
 function preload() {
     // W tej metodzie ładujemy wszystkie potrzebne assety
     game.load.atlas('mario', 'assets/images/mario/mario.png', 'assets/images/mario/mario.json');
     game.load.image('tiles', 'assets/map/tiles.png');
     game.load.tilemap('map', 'assets/map/map.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.audio('music', 'assets/sounds/theme.mp3');
+    game.load.audio('jump', 'assets/sounds/jump.mp3');
 };
 
 function create() {
@@ -50,6 +53,12 @@ function create() {
     mapLayers['background'] = map.createLayer('background');
     mapLayers['collide'].resizeWorld();
     map.setCollisionBetween(1, 99, true, mapLayers['collide']);
+
+    // Audio
+    audio['music'] = game.add.audio('music');
+    audio['jump'] = game.add.audio('jump');
+
+    audio['music'].play();
 };
 
 function update() {
@@ -74,6 +83,7 @@ function update() {
 
     if (spacebar.isDown && mario.body.onFloor()) {
         mario.body.velocity.y = -300;
+        audio['jump'].play();
     }
 };
 
