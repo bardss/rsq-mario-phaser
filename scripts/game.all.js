@@ -33,6 +33,11 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
     spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
+    // dodanie fizyki dla samej postaci
+    game.physics.arcade.gravity.y = 500;  
+    mario.body.collideWorldBounds = true; 
+    mario.body.bounce.y = 0.2;
+
     // mapa
     game.stage.backgroundColor = "#6888ff";
     map = game.add.tilemap('map');
@@ -47,6 +52,8 @@ function create() {
 function update() {
     // Główna pętla gry
     // Metoda uruchamiana jest z bardzo dużą częstotliwością (~60 fps)
+    game.physics.arcade.collide(mario, mapLayers['collide']);
+
     if (cursors.right.isDown) {
         mario.body.velocity.x = 150;
         mario.scale.x = 1;
