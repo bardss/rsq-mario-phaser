@@ -72,7 +72,7 @@ function update() {
         mario.frameName = "idle";
     }
 
-    if (spacebar.isDown) {
+    if (spacebar.isDown && mario.body.onFloor()) {
         mario.body.velocity.y = -300;
     }
 };
