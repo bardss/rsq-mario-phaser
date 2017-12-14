@@ -8,6 +8,8 @@ var game = new Phaser.Game(260, 240, Phaser.AUTO, "game", {
 var mario;
 var cursors;
 var spacebar;
+var map;
+var mapLayers = {};
 
 function preload() {
     // W tej metodzie ładujemy wszystkie potrzebne assety
@@ -33,7 +35,13 @@ function create() {
 
     // mapa
     game.stage.backgroundColor = "#6888ff";
+    map = game.add.tilemap('map');
+    map.addTilesetImage('tiles');
 
+    mapLayers['collide'] = map.createLayer('collide');
+    mapLayers['background'] = map.createLayer('background');
+    mapLayers['collide'].resizeWorld();
+    map.setCollisionBetween(1, 99, true, mapLayers['collide']);
 };
 
 function update() {
